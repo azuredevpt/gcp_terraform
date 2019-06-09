@@ -28,10 +28,15 @@ resource "google_compute_instance" "hdp_vm1" {
       image = "centos-7"
     }
   }
+#for aws only
+#key_name = ""
 
 metadata = {
    ssh-keys = "useradmin:${file("~/.ssh/id_rsa.pub")}"
+  
  }
+
+metadata_startup_script = "${file("startup.ign")}"
 
 network_interface {
     # A default network is created for all GCP projects
@@ -52,7 +57,7 @@ resource "google_compute_firewall" "default" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22", "80"]
   }
 
 }
