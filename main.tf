@@ -14,12 +14,13 @@
 
 resource "google_compute_instance" "hdp_vm1" {
 
-
+  name         = "hadoop-vm1"
   machine_type = "n1-standard-1"
+ 
+ #tags{
+  #name = "NoeudHadoop"
+#} 
 
-tags{
-  name = "NoeudHadoop"
-} 
   #tags = ["foo", "bar"]
 
   boot_disk {
